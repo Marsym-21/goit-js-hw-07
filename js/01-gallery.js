@@ -42,8 +42,8 @@ function createAndOpenModal(link) {
 	modal.show();
 }
 
-function deletDataHref(link) {
-	return link.removeAttribute("href");
+function deletDataHref(teg) {
+	return teg.removeAttribute("href");
 }
 
 function pushEscape(event) {
