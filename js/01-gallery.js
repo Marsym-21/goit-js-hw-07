@@ -21,23 +21,34 @@ function createGalleryImages(items) {
 }
 
 gallery.addEventListener("click", onImageClick);
-
-let originalUrl = null;
-
-const modal = basicLightbox.create(`
-   <img src="${originalUrl}" >
-`);
+document.addEventListener("keydown", pushEscape);
 
 function onImageClick(event) {
 	if (event.target.nodeName !== "IMG") {
 		return;
 	}
-	originalUrl = event.target.dataset.source;
+
+	const originalUrl = event.target.dataset.source;
 	const linkHref = event.target.parentNode;
+
 	deletDataHref(linkHref);
+	createAndOpenModal(originalUrl);
+}
+
+let modal;
+function createAndOpenModal(link) {
+	modal = basicLightbox.create(`
+   <img src="${link}" alt="" width = "500"/>`);
 	modal.show();
 }
 
 function deletDataHref(link) {
 	return link.removeAttribute("href");
+}
+
+function pushEscape(event) {
+	const EscKeyCode = "Escape";
+	if (event.code === EscKeyCode) {
+		modal.close();
+	}
 }
