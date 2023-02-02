@@ -21,29 +21,22 @@ function createGalleryImages(items) {
 }
 
 gallery.addEventListener("click", onImageClick);
-document.addEventListener("keydown", pushEscape);
 
 function onImageClick(event) {
+	event.preventDefault();
 	if (event.target.nodeName !== "IMG") {
 		return;
 	}
-
+	document.addEventListener("keydown", pushEscape);
 	const originalUrl = event.target.dataset.source;
-	const linkHref = event.target.parentNode;
-
-	deletDataHref(linkHref);
 	createAndOpenModal(originalUrl);
 }
 
 let modal;
 function createAndOpenModal(link) {
 	modal = basicLightbox.create(`
-   <img src="${link}" alt="" width = "500"/>`);
+   <img src="${link}" alt="" />`);
 	modal.show();
-}
-
-function deletDataHref(teg) {
-	return teg.removeAttribute("href");
 }
 
 function pushEscape(event) {
@@ -51,4 +44,5 @@ function pushEscape(event) {
 	if (event.code === EscKeyCode) {
 		modal.close();
 	}
+	document.removeEventListener("keydown", pushEscape);
 }
