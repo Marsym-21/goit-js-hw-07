@@ -28,6 +28,6 @@ lightbox.on("show.simplelightbox", function (event) {
 	title.textContent = titleImage;
 
 	const modalImageBox = lightbox.domNodes.image;
-	modalImageBox.insertAdjacentHTML("beforeend", title);
-	console.log(modalImageBox);
+
+	console.log(modalImageBox.innerHTML);
 });
