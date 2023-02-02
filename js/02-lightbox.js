@@ -19,15 +19,4 @@ function createGalleryImages(items) {
 		.join(``);
 }
 
-var lightbox = new SimpleLightbox(".gallery a", {});
-
-lightbox.on("show.simplelightbox", function (event) {
-	const image = event.currentTarget.firstElementChild;
-	const titleImage = image.getAttribute("alt");
-	const title = document.createElement("h1");
-	title.textContent = titleImage;
-
-	const modalImageBox = lightbox.domNodes.image;
-
-	console.log(modalImageBox.innerHTML);
-});
+var lightbox = new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250 });
