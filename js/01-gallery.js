@@ -28,10 +28,16 @@ gallery.onclick = event => {
 	const link = event.target.dataset.source;
 	const html = `<img src="${link}" alt="" />`;
 
-	modal = basicLightbox.create(html);
+	modal = basicLightbox.create(html, {
+		onShow: modal => {
+			document.addEventListener("keydown", pushEscape);
+		},
+		onClose: modal => {
+			document.removeEventListener("keydown", pushEscape);
+		},
+	});
 
 	modal.show();
-	document.addEventListener("keydown", pushEscape);
 };
 
 function pushEscape(event) {
@@ -39,5 +45,4 @@ function pushEscape(event) {
 	if (event.code === EscKeyCode) {
 		modal.close();
 	}
-	document.removeEventListener("keydown", pushEscape);
 }
