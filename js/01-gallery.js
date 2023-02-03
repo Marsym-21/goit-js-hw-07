@@ -19,25 +19,20 @@ function createGalleryImages(items) {
 		})
 		.join(``);
 }
-
-gallery.addEventListener("click", onImageClick);
-
-function onImageClick(event) {
+let modal;
+gallery.onclick = event => {
 	event.preventDefault();
 	if (event.target.nodeName !== "IMG") {
 		return;
 	}
-	document.addEventListener("keydown", pushEscape);
-	const originalUrl = event.target.dataset.source;
-	createAndOpenModal(originalUrl);
-}
+	const link = event.target.dataset.source;
+	const html = `<img src="${link}" alt="" />`;
 
-let modal;
-function createAndOpenModal(link) {
-	modal = basicLightbox.create(`
-   <img src="${link}" alt="" />`);
+	modal = basicLightbox.create(html);
+
 	modal.show();
-}
+	document.addEventListener("keydown", pushEscape);
+};
 
 function pushEscape(event) {
 	const EscKeyCode = "Escape";

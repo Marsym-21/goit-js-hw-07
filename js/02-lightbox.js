@@ -19,4 +19,4 @@ function createGalleryImages(items) {
 		.join(``);
 }
 
-var lightbox = new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250 });
+lightbox = new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250 });
